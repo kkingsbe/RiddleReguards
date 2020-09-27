@@ -3,7 +3,7 @@
 	import Posts from "./components/Posts.svelte"
 	import NewPost from "./components/NewPost.svelte"
 	
-	let screen = "newpost"
+	let screen = "posts"
 	function newpost() {
 		screen = "newpost"
 		console.log(screen)
