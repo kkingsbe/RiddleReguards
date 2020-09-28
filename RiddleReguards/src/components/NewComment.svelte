@@ -1,29 +1,9 @@
 <script>
-    import Post from "./Post.svelte"
-    export let select
-
-    var posts = []
+    export let screen
+    export let id
     
-    async function main() {
-        posts = await getPosts()
-        console.log(posts)
-        //console.log(typeof(posts))
-    }
-
-    async function getPosts() {
-        return new Promise((resolve, reject) => {
-            fetch("https://jeow7risp7.execute-api.us-east-1.amazonaws.com/RRGetPosts")
-            .then(res => {
-                return res.json()
-            })
-            .then(data => {
-                posts = data
-                resolve(posts)
-            })
-        })
-    }
-
-    async function addComment(id, text) {
+    var text = ""
+    async function addComment() {
         return new Promise((resolve, reject) => {
             var requestOptions = {
                 method: 'POST',
@@ -44,23 +24,47 @@
                 });
         })
     }
-
-    main()
 </script>
 
 <main>
-    {#if typeof(posts) == "object"}
-        {#each posts as post}
-            <Post id={post.id} content={post.text} select={select}></Post>
-        {/each}
-    {/if}
+    <textarea class="postEntry" bind:value={text}></textarea>
+    <div class="submit" on:click={addComment}><p>Submit</p></div>
 </main>
 
 <style>
     main {
+        height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-top: 7em;
+        justify-content: center;
+    }
+
+    .postEntry {
+        width: 75vw;
+        height: 30vh;
+        border-radius: 20px;
+        text-align: start;
+        resize: none;
+        font-size: 5vw;
+    }
+
+    .postEntry:focus {
+        outline: none;
+    }
+
+    .submit {
+        background: #FFF895;
+        padding: 30px;
+        border-radius: 20px;
+        padding: 10px 20px 10px 20px;
+        margin-top: 15px;
+		box-shadow: 2px 2px 5px 2px rgba(0,0,0,0.2);
+    }
+
+    .submit p {
+        font-size: 7vw;
+        padding: 0;
+        margin: 0;
     }
 </style>

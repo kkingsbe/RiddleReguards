@@ -2,11 +2,20 @@
 	export let name;
 	import Posts from "./components/Posts.svelte"
 	import NewPost from "./components/NewPost.svelte"
-	
+	import ViewComments from "./components/ViewComments.svelte"
+	import NewComment from "./components/NewComment.svelte"
+
+	var selectedId
 	let screen = "posts"
 	function newpost() {
 		screen = "newpost"
-		console.log(screen)
+	}
+	function viewComments(id) {
+		selectedId = id
+		screen = "viewcomments"
+	}
+	function newcomment() {
+		screen = "newcomment"
 	}
 </script>
 
@@ -15,7 +24,7 @@
 		<div class="title">
 			<h1>Posts:</h1>
 		</div>
-		<Posts></Posts>
+		<Posts select={viewComments} selectedId={selectedId}></Posts>
 		<div class="newPost" on:click={newpost}><p>+</p></div>
 	{/if}
 	{#if screen == "newpost"}
@@ -23,6 +32,19 @@
 			<h1>New Post</h1>
 		</div>
 		<NewPost bind:screen={screen}></NewPost>
+	{/if}
+	{#if screen == "viewcomments"}
+		<div class="title">
+			<h1>Comments</h1>
+		</div>
+		<ViewComments id={selectedId} bind:screen={screen}></ViewComments>
+		<div class="newPost" on:click={newcomment}><p>+</p></div>
+	{/if}
+	{#if screen == "newcomment"}
+		<div class="title">
+			<h1>New Comment</h1>
+		</div>
+		<NewComment id={selectedId} bind:screen={screen}></NewComment>
 	{/if}
 </main>
 

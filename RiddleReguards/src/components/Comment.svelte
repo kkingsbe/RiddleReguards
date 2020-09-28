@@ -1,23 +1,23 @@
 <script>
-    export let id
+    export let timestamp
     export let content
     export let select
-    import cssVars from 'svelte-css-vars'
 
-    var hue = id * 13
-    $: vars = {
-        hue: hue
-    }
+    var date = new Date(timestamp)
+    console.log(date)
+    var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours()
+    var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()
+    var time = `${hours}:${minutes}`
 </script>
 
-<main use:cssVars={vars} on:click={select(id)}>
-    <h1>#{id}</h1>
+<main>
+    <h1>{time}</h1>
     <p>{content}</p>
 </main>
 
 <style>
     main {
-        background: hsl(var(--hue), 100%, 87%);
+        background: hsl(50, 69%, 85%);
         border-radius: 20px;
         width: 80vw;
         margin-bottom: 20px;
