@@ -1,28 +1,35 @@
 <script>
     export let screen
     var submission = ""
+    var addingPost = false
+
     async function addPost() {
-        return new Promise((resolve, reject) => {
-            var formdata = new FormData();
+        if(!addingPost) {
+            addingPost = true
+            return new Promise((resolve, reject) => {
+                var formdata = new FormData();
 
-            var requestOptions = {
-                method: 'POST',
-                body: JSON.stringify({text: submission}),
-                redirect: 'follow'
-            };
+                var requestOptions = {
+                    method: 'POST',
+                    body: JSON.stringify({text: submission}),
+                    redirect: 'follow'
+                };
 
-            fetch("https://jeow7risp7.execute-api.us-east-1.amazonaws.com/RRaddPost", requestOptions)
-                .then(response => response.text())
-                .then(result => {
-                    console.log(result)
-                    screen = "posts"
-                    resolve(result)
-                })
-                .catch(error => {
-                    console.log('error', error)
-                    reject(error)
-                });
-        })
+                fetch("https://jeow7risp7.execute-api.us-east-1.amazonaws.com/RRaddPost", requestOptions)
+                    .then(response => response.text())
+                    .then(result => {
+                        console.log(result)
+                        screen = "posts"
+                        addingPost = false
+                        resolve(result)
+                    })
+                    .catch(error => {
+                        console.log('error', error)
+                        addingPost = false
+                        reject(error)
+                    });
+            })
+        }
     }
 </script>
 

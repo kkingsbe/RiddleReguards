@@ -2,27 +2,33 @@
     export let screen
     export let id
     
+    var addingComment = false
     var text = ""
     async function addComment() {
-        return new Promise((resolve, reject) => {
-            var requestOptions = {
-                method: 'POST',
-                body: JSON.stringify({id: id, text: text}),
-                redirect: 'follow'
-            };
+        if(!addingComment) {
+            addingComment = true
+            return new Promise((resolve, reject) => {
+                var requestOptions = {
+                    method: 'POST',
+                    body: JSON.stringify({id: id, text: text}),
+                    redirect: 'follow'
+                };
 
-            fetch("https://jeow7risp7.execute-api.us-east-1.amazonaws.com/RRaddComment", requestOptions)
-                .then(response => response.text())
-                .then(result => {
-                    console.log(result)
-                    screen = "viewcomments"
-                    resolve(result)
-                })
-                .catch(error => {
-                    console.log('error', error)
-                    reject(error)
-                });
-        })
+                fetch("https://jeow7risp7.execute-api.us-east-1.amazonaws.com/RRaddComment", requestOptions)
+                    .then(response => response.text())
+                    .then(result => {
+                        console.log(result)
+                        screen = "viewcomments"
+                        addingComment = false
+                        resolve(result)
+                    })
+                    .catch(error => {
+                        console.log('error', error)
+                        addingComment = false
+                        reject(error)
+                    });
+            })
+        }
     }
 </script>
 
