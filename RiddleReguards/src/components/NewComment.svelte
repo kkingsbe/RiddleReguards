@@ -15,7 +15,7 @@
                 .then(response => response.text())
                 .then(result => {
                     console.log(result)
-                    screen = "posts"
+                    screen = "viewcomments"
                     resolve(result)
                 })
                 .catch(error => {
