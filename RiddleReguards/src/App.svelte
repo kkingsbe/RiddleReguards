@@ -17,6 +17,23 @@
 	function newcomment() {
 		screen = "newcomment"
 	}
+
+	history.pushState(null, document.title, location.href);
+	window.addEventListener('popstate', function (event)
+	{
+		history.pushState(null, document.title, location.href)
+		switch(screen) {
+			case "newpost":
+				screen = "posts"
+				break
+			case "viewcomments":
+				screen = "posts"
+				break
+			case "newcomment":
+				screen = "viewcomments"
+				break
+		}
+	});
 </script>
 
 <main>
