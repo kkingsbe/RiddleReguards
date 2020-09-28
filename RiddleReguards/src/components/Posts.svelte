@@ -7,7 +7,6 @@
     async function main() {
         posts = await getPosts()
         console.log(posts)
-        //console.log(typeof(posts))
     }
 
     async function getPosts() {
@@ -20,28 +19,6 @@
                 posts = data
                 resolve(posts)
             })
-        })
-    }
-
-    async function addComment(id, text) {
-        return new Promise((resolve, reject) => {
-            var requestOptions = {
-                method: 'POST',
-                body: JSON.stringify({id: id, text: text}),
-                redirect: 'follow'
-            };
-
-            fetch("https://jeow7risp7.execute-api.us-east-1.amazonaws.com/RRaddComment", requestOptions)
-                .then(response => response.text())
-                .then(result => {
-                    console.log(result)
-                    screen = "posts"
-                    resolve(result)
-                })
-                .catch(error => {
-                    console.log('error', error)
-                    reject(error)
-                });
         })
     }
 

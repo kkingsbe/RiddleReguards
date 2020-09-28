@@ -2,7 +2,37 @@
     export let id
     export let content
     export let select
+    export let comments
+
     import cssVars from 'svelte-css-vars'
+    var numComments = 0
+
+    async function main() {
+        numComments = (await getComments(id)).length
+    }
+
+    async function getComments(id) {
+        return new Promise((resolve, reject) => {
+            var requestOptions = {
+                method: 'POST',
+                body: JSON.stringify({id: id}),
+                redirect: 'follow'
+            };
+
+            fetch("https://jeow7risp7.execute-api.us-east-1.amazonaws.com/RRGetComments", requestOptions)
+                .then(response => response.text())
+                .then(result => {
+                    screen = "posts"
+                    resolve(JSON.parse(result))
+                })
+                .catch(error => {
+                    console.log('error', error)
+                    reject(error)
+                });
+        })
+    }
+
+    main()
 
     var hue = id * 13
     $: vars = {
@@ -13,6 +43,7 @@
 <main use:cssVars={vars} on:click={select(id)}>
     <h1>#{id}</h1>
     <p>{content}</p>
+    <p class="num-comments">{numComments} comments</p>
 </main>
 
 <style>
@@ -38,5 +69,12 @@
     p {
         padding: 0;
         margin: 0;
+    }
+
+    .num-comments {
+        width: 100%;
+        text-align: start;
+        font-size: 13px;
+        margin-top: 20px;
     }
 </style>
