@@ -39,4 +39,14 @@
         padding: 0;
         margin: 0;
     }
+
+    @media (min-width: 100vh) {
+		h1 {
+			font-size: 5vh;
+		}
+
+        main {
+            width: 60vh;
+        }
+	}
 </style>

@@ -74,4 +74,15 @@
         padding: 0;
         margin: 0;
     }
+
+    @media (min-width: 100vh) {
+		.submit p {
+            font-size: 5vh;
+        }
+
+        .postEntry {
+            width: 75vh;
+            height: 30vh;
+        }
+	}
 </style>

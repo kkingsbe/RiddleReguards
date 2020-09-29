@@ -65,6 +65,16 @@
         text-align: start;
         padding: 5px 0 15px 5px;
     }
+
+    @media (min-width: 100vh) {
+		h1 {
+			font-size: 5vh;
+		}
+
+        main {
+            width: 60vh;
+        }
+	}
     
     p {
         padding: 0;

@@ -88,6 +88,12 @@
 		margin: 0px;
 	}
 
+	@media (min-width: 100vh) {
+		h1 {
+			font-size: 5vh;
+		}
+	}
+
 	.newPost {
 		border-radius: 50%;
 		width: 3.5em;
