@@ -24,10 +24,11 @@
         box-shadow: 3px 3px 5px 3px rgba(0,0,0,0.2);
         padding: 10px;
         font-size: 1.2em;
+        cursor: pointer;
     }
 
     h1 {
-		font-size: 6vw;
+		font-size: 5vw;
 		font-weight: 100;
 		padding: 0px;
         margin: 0px;
@@ -42,7 +43,7 @@
 
     @media (min-width: 100vh) {
 		h1 {
-			font-size: 5vh;
+			font-size: 4vh;
 		}
 
         main {

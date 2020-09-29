@@ -67,6 +67,7 @@
         padding: 10px 20px 10px 20px;
         margin-top: 15px;
 		box-shadow: 2px 2px 5px 2px rgba(0,0,0,0.2);
+        cursor: pointer;
     }
 
     .submit p {
@@ -83,6 +84,7 @@
         .postEntry {
             width: 75vh;
             height: 30vh;
+            font-size: 3vh;
         }
 	}
 </style>
